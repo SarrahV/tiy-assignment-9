@@ -1,0 +1,91 @@
+
+
+$(function(){
+
+  $(".button-column").on("click", "button", function(event){      /// grabbing all button element. Adds event listener
+    event.preventDefault();                                       /// prevent the default action
+    
+    
+    var node = event.currentTarget;                                /// node clicked  (same as target)
+    var elem = $(node);                                            /// wrap the current target in jquery so it becomes object, we can get text out of it
+    var text = elem.data("name");                                  /// now we can use the text method to get the text out of the jquery object
+    
+     $(".screen-output").append(text);                             /// make class .screen-output an object, place text in
+  });
+
+});
+
+
+
+var cleared =  $(".clr").on("click", "button", function(event){
+  return(".screen-output").text;
+});
+
+
+/* var cleared =  $(".clr").on("click", "button", function(event){
+  console.log(cleared);
+  return(".screen-output").text("0");
+}); */
+
+
+
+$(function(){
+
+var numlength = 0;
+var theAnswer;     //for final answer
+var calculation;   //to hold screenoutput as calc string
+var myString;
+var oneNum; = null;
+var twoum;
+
+
+
+var current = $(".button-column").on("click", "button", function(event){      /// grabbing all button element. Adds event listener
+  event.preventDefault();                                                     /// prevent the default action 
+  var node = event.currentTarget;                                            /// node clicked  (same as target)
+  var elem = $(node);                                                       /// wrap the current target in jquery so it becomes object, we can get text out of it
+  var text = elem.data("name");                                             /// now we can use the text method to get the text out of the jquery object
+  turnRed(text);
+
+  if(elem.hasClass("black")) {
+    $(myString)                               //  - capture event, what operation is it, add to a string
+  } else {
+    if(numlength <= 7) {                                                   ///restrict length of characters
+      numlength++;
+      $(".screen-output").append(text);                                  /// make class .screen-output an object, place text in
+    } else {
+      return(".screen-output");
+    }
+  }
+});
+
+
+
+var turnRed = function(text){                                    
+
+  if(text === "/") {
+    $(".op1").addClass("chosen");
+
+  };
+  if(text === "*") {
+    $(".op2").addClass("chosen");
+  };
+  if(text === "-") {
+    $(".op3").addClass("chosen");
+  };
+  if(text === "+") {
+    $(".op4").addClass("chosen");
+  };
+ 
+};
+
+});
+
+
+
+
+
+
+
+
+//need to clear display and set to 0 when clear selected
