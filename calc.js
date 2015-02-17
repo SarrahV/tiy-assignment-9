@@ -1,72 +1,109 @@
 $(function(){
 
 var numlength = 0;
-var answer = null;
-var oneNum = null;
-var twoNum = null;
-var opHold = null;
+var oneNum = "";
+var twoNum = "";
+var opHold = "";
+var shouldClear = false;
 
 
-$("button.number").on("click", function(event){      /// grabbing all button element. Adds event listener
-  event.preventDefault(); 
+
+$("button.number").on("click", function(event){      
+
                                 
-  var node = event.currentTarget;                                            /// node clicked  (same as target)
-  var elem = $(node);                                                       /// wrap the current target in jquery so it becomes object, we can get text out of it
-  var text = elem.data("name");                                             /// now we can use the text method to get the text out of the jquery object
-    if(opHold === null) {
+  var node = event.currentTarget;                                            
+  var elem = $(node);                                                       
+  var text = elem.data("name").toString();                                             
+
+    if(opHold === "") {
+      
       oneNum = oneNum + text;
-    } else {
+    } 
+
+    else {
+      
       twoNum = twoNum + text;
     }
-    answer = answer + text;
 
     if(numlength <= 7) {                                                   
       numlength++;
+    
+    if(shouldClear) {
+        $(".screen-output").text("");
+        shouldClear = false;
+    }
       $(".screen-output").append(text);                                 
     } 
       return(".screen-output");
+  
 });
 
 
-$("button.oprt").on("click", function(event){      /// grabbing all button element. Adds event listener
-  event.preventDefault(); 
+$("button.oprt").on("click", function(event){     
 
-  var node = event.currentTarget;                                            /// node clicked  (same as target)
-  var elem = $(node);                                                       /// wrap the current target in jquery so it becomes object, we can get text out of it
-  var text = elem.data("name");                                             /// now we can use the text method to get the text out of the jquery object
+  var node = event.currentTarget;                                            
+  var elem = $(node);                                                       
+  var text = elem.data("name");
+  turnRed(text);                                             
+  shouldClear = true;
 
-  answer = answer + text;
+  // answer = answer + text;
+  
   opHold = text;
 
 });
 
 
-$("button.equals").on("click", function(event){      /// grabbing all button element. Adds event listener
-  event.preventDefault(); 
-  var node = event.currentTarget;                                            /// node clicked  (same as target)
-  var elem = $(node);                                                       /// wrap the current target in jquery so it becomes object, we can get text out of it
-  var text = elem.data("name");                                             /// now we can use the text method to get the text out of the jquery object
+$("button.equals").on("click", function(event){      
 
-  eval(answer); 
+  var node = event.currentTarget;                                            
+  var elem = $(node);                                                       
+  var text = elem.data("name");                                           
+
+  
+  var answer = createAns();
   $(".screen-output").text(answer); 
 });
 
 
-$("button.clr").on("click", function(event){      /// grabbing all button element. Adds event listener
-  event.preventDefault(); 
-                                ///clear out display and my string
-  var node = event.currentTarget;                                            /// node clicked  (same as target)
-  var elem = $(node);                                                       /// wrap the current target in jquery so it becomes object, we can get text out of it
-  var text = elem.data("name");                                             /// now we can use the text method to get the text out of the jquery object
+$("button.clear-me").on("click", function(event){     
+                                
+  var node = event.currentTarget;                                            
+  var elem = $(node);                                                       
+  var text = elem.data("name"); 
+ 
+  numlength = 0;
+  oneNum = "";
+  twoNum = "";
+  opHold = "";                                      
 
-  $(".screen-output").text(0); 
-  answer = null;
-  oneNum = null;
-  twoNum = null;
-});
+  $(".screen-output").text(""); 
+ 
+}); 
+
+var createAns = function(){
+  var numberOne = Number(oneNum);
+  var numberTwo = Number(twoNum);
+
+ switch(opHold) {
+  case "/":
+    return numberOne / numberTwo;
+  break;
+  case "+":
+    return numberOne + numberTwo;
+  break;
+  case "*":
+    return numberOne * numberTwo;
+  break;
+  case "-":
+    return numberOne - numberTwo;
+  break;
+
+ }
+}
 
 
-var turnRed = function(text){                                    
+var turnRed = function(text){                                   
 
   if(text === "/") {
     $(".op1").addClass("chosen");
@@ -91,4 +128,3 @@ var turnRed = function(text){
 
 
 
-//need to clear display and set to 0 when clear selected
