@@ -77,7 +77,11 @@ $("button.clear-me").on("click", function(event){
   twoNum = "";
   opHold = "";                                      
 
-  $(".screen-output").text(""); 
+  $(".screen-output").text("");
+  $(".op1").removeClass("chosen");
+  $(".op2").removeClass("chosen");
+  $(".op3").removeClass("chosen");
+  $(".op4").removeClass("chosen"); 
  
 }); 
 
